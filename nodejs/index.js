@@ -1,12 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const csv = require('csv-parser');
 const cors = require("cors");
 const app = express();
-const PORT = 4000;
-const corsOptions = {
-    origin: [ "http://localhost:5173" ]
-};
+const serverPort = process.env.SERVER_PORT || 4000;
+const clientPort = process.env.CLIENT_PORT || 5173;
 const CSV_PATH = 'Steel_industry_data.csv';
 
 // Enable CORS for React frontend
@@ -59,6 +58,4 @@ app.get('/all-data', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+app.listen(serverPort, () => console.log(serverPort));
