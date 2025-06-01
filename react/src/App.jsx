@@ -61,6 +61,7 @@ function App() {
 			return dateRange && matchedDay && matchedLoadType;
 		});
 		setFiltered(filteredData);
+		setTotalUsage(totalUsed);
 		setAverageUsage(filteredData.length > 0 ? totalUsed / filteredData.length : 0);
         setTotalEntriesReturned(filteredData.length);
     };
