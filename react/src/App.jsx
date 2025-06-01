@@ -134,6 +134,13 @@ function App() {
             calculcation: totalEntriesReturned
         },
     ];
+
+    const tableHeadings = [
+        'Date',
+        'Usage (kWh)',
+        'Day of Week',
+        'Type of Load'
+    ];
   	
 	return (
 		<div>
