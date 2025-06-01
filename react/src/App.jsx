@@ -4,6 +4,7 @@ import {
     HeadingOne,
     Input_DateTime,
     Input_Select,
+    List,
 } from './Components';
 import './App.css'
 
@@ -113,6 +114,25 @@ function App() {
         'Saturday',
         'Sunday'
     ];
+
+    const listData = [
+        {
+            listItemContent: 'Total Usage (kWh): ',
+            calculcation: totalUsage.toFixed(2)
+        },
+        {
+            listItemContent: 'Average Usage (kWh): ',
+            calculcation: averageUsage.toFixed(2)
+        },
+        {
+            listItemContent: 'Median Usage (kWh): ',
+            calculcation: medianUsage
+        },
+        {
+            listItemContent: 'Total Entries Returned: ',
+            calculcation: totalEntriesReturned
+        },
+    ];
   	
 	return (
 		<div>
@@ -148,15 +168,8 @@ function App() {
                 />
                 <Button_Submit label={'Get Records'} onClick={handleFilter} />
             </div>
-            
-			<div style={{ marginBottom: '1rem' }}>
-				<strong>Total Usage (kWh):</strong> {totalUsage.toFixed(2)}
-				<br/>
-				<strong>Average Usage (kWh):</strong> {averageUsage.toFixed(2)}
-				<br />
-                <strong>Total entries returned: </strong> {totalEntriesReturned}
-                <br />
-                <strong>Median Usage (kWh): </strong> { medianUsage }
+            <div>
+                <List listData={listData} />
             </div>
             <div
                 style={{
