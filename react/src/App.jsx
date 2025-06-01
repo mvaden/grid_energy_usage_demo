@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
     Button_Submit,
     HeadingOne,
+    HeadingTwo,
     Input_DateTime,
     Input_Select,
     List,
@@ -32,7 +33,7 @@ function App() {
 	useEffect(() => {
         fetch('/api/all-data')
             .then(res => {
-                if (!res.ok) throw new Error("HTTP Error: status ", res.status);
+                if (!res.ok) throw new Error('HTTP Error: status ', res.status);
                 
                 const contentType = res.headers.get('content-type');
                 if (!contentType || !contentType.includes('application/json')) throw new Error('Response is not JSON');
@@ -97,6 +98,7 @@ function App() {
 		<div>
             <HeadingOne value={ 'Steel Industry Energy Usage' } />
             <div style={{ marginBottom: '1rem' }}>
+                <HeadingTwo value={ 'Energy Records Form' } />
                 <Input_DateTime
                     label={ 'Start Date: ' }
                     onChange={e =>  setStartDate(e.target.value)}
@@ -131,6 +133,7 @@ function App() {
                 filtered.length > 0 &&
                 <>
                     <div>
+                        <HeadingTwo value={ 'Totals and Means' } />
                         <List listData={listData} />
                     </div>
                     <div
@@ -140,6 +143,7 @@ function App() {
                             width: 'auto'
                         }}
                     >
+                        <HeadingTwo value={ 'Energy Usage Table Data' } />
                         <Table
                             cellBorder={'5'}
                             cellPadding={'5'}
