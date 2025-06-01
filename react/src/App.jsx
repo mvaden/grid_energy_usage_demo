@@ -5,6 +5,7 @@ import {
     Input_DateTime,
     Input_Select,
     List,
+    Table
 } from './Components';
 import './App.css'
 
