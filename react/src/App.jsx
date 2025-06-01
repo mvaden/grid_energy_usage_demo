@@ -8,6 +8,7 @@ function App() {
 	const [filtered, setFiltered] = useState([]);
 	const [totalUsage, setTotalUsage] = useState(0);
     const [averageUsage, setAverageUsage] = useState(0);
+    const [medianUsage, setMedianUsage] = useState(0);
 	const [totalEntriesReturned, setTotalEntriesReturned] = useState(0);
 	const [selectedDays, setSelectedDays] = useState([]);
     const [selectedLoadTypes, setSelectedLoadTypes] = useState([]);
@@ -32,6 +33,24 @@ function App() {
 		});
   	}, []);
 
+    const findArrayMedian = (values) => {
+        if (!Array.isArray(values) || values.length === 0) return null;
+
+        const sortValues = [...values].sort((a, b) => a - b);
+        const valuesLength = sortValues.length;
+        const calculateMedian = Math.floor(valuesLength / 2);
+
+        if (valuesLength % 2 === 1) return sortValues[calculateMedian];
+
+        if (valuesLength % 2 === 0) {
+            const mid = valuesLength / 2
+            const firstHalf = sortValues.slice(0, mid);
+            const secondHalf = sortValues.slice(mid);
+            const calculatedMedianValue = Math.floor(((firstHalf[0] + secondHalf[secondHalf.length - 1]) / 2) * 1000) / 1000;
+
+            return calculatedMedianValue;
+        };
+    };
     
 	function formatDates(array, dateKey) {
 		return array.map((item) => {
@@ -63,6 +82,10 @@ function App() {
 		});
 			
         const totalUsed = filteredData.reduce((sum, row) => sum + row.Usage_kWh, 0);
+        const medianUsage = filteredData.map(({ Usage_kWh }) => Usage_kWh).sort((a, b) => a - b);
+        const findMedian = findArrayMedian(medianUsage);
+
+        setMedianUsage(findMedian);
 		setFiltered(filteredData);
 		setTotalUsage(totalUsed);
 		setAverageUsage(filteredData.length > 0 ? totalUsed / filteredData.length : 0);
@@ -158,6 +181,8 @@ function App() {
 				<strong>Average Usage (kWh):</strong> {averageUsage.toFixed(2)}
 				<br />
                 <strong>Total entries returned: </strong> {totalEntriesReturned}
+                <br />
+                <strong>Median Usage (kWh): </strong> { medianUsage }
             </div>
             
             <div
