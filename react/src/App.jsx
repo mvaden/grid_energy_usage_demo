@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+    Button_Submit,
     HeadingOne,
     Input_DateTime,
     Input_Select,
@@ -145,6 +146,7 @@ function App() {
                     }}
                     value={selectedLoadTypes}
                 />
+                <Button_Submit label={'Get Records'} onClick={handleFilter} />
             </div>
             
 			<div style={{ marginBottom: '1rem' }}>
