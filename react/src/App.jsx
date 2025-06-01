@@ -127,25 +127,30 @@ function App() {
                 />
                 <Button_Submit label={'Get Records'} onClick={handleFilter} />
             </div>
-            <div>
-                <List listData={listData} />
-            </div>
-            <div
-                style={{
-                    height: '25rem',
-                    overflowY: 'scroll',
-                    width: 'auto'
-                }}
-            >
-                <Table
-                    cellBorder={'5'}
-                    cellPadding={'5'}
-                    overflowY={'scroll'}
-                    tableData={filtered}
-                    tableHeadings={tableHeadings}
-                    tableWidth={'auto'}
-                />
-			</div>
+            {
+                filtered.length > 0 &&
+                <>
+                    <div>
+                        <List listData={listData} />
+                    </div>
+                    <div
+                        style={{
+                            height: '25rem',
+                            overflowY: 'scroll',
+                            width: 'auto'
+                        }}
+                    >
+                        <Table
+                            cellBorder={'5'}
+                            cellPadding={'5'}
+                            overflowY={'scroll'}
+                            tableData={filtered}
+                            tableHeadings={tableHeadings}
+                            tableWidth={'auto'}
+                        />
+                    </div>
+                </>
+            }
 		</div>
   	)
 };
