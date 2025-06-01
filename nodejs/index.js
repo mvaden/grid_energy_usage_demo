@@ -8,8 +8,10 @@ const serverPort = process.env.SERVER_PORT || 4000;
 const clientPort = process.env.CLIENT_PORT || 5173;
 const CSV_PATH = 'Steel_industry_data.csv';
 
-// Enable CORS for React frontend
 app.use((req, res, next) => {
+    cors({
+        origin: [ `"http://localhost:${clientPort}` ]
+    });
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
