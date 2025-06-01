@@ -8,6 +8,7 @@ function App() {
 	const [filtered, setFiltered] = useState([]);
 	const [totalUsage, setTotalUsage] = useState(0);
     const [averageUsage, setAverageUsage] = useState(0);
+	const [totalEntriesReturned, setTotalEntriesReturned] = useState(0);
 	const [selectedDays, setSelectedDays] = useState([]);
     const [selectedLoadTypes, setSelectedLoadTypes] = useState([]);
     const [error, setError] = useState(undefined);
@@ -60,6 +61,8 @@ function App() {
             
 			return dateRange && matchedDay && matchedLoadType;
 		});
+			
+        const totalUsed = filteredData.reduce((sum, row) => sum + row.Usage_kWh, 0);
 		setFiltered(filteredData);
 		setTotalUsage(totalUsed);
 		setAverageUsage(filteredData.length > 0 ? totalUsed / filteredData.length : 0);
@@ -153,6 +156,8 @@ function App() {
 				<strong>Total Usage (kWh):</strong> {totalUsage.toFixed(2)}
 				<br/>
 				<strong>Average Usage (kWh):</strong> {averageUsage.toFixed(2)}
+				<br />
+                <strong>Total entries returned: </strong> {totalEntriesReturned}
             </div>
             
             <div
