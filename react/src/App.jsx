@@ -3,6 +3,9 @@ import './App.css'
 
 function App() {
     const [message, setMessage] = useState('waiting...');
+	const [startDate, setStartDate] = useState('');
+	const [endDate, setEndDate] = useState('');
+	const [filtered, setFiltered] = useState([]);
     const [error, setError] = useState(undefined);
 
 	useEffect(() => {
@@ -38,6 +41,18 @@ function App() {
 			};
 		});
 	};
+
+	const handleFilter = () => {
+		if (!startDate || !endDate) return;
+
+		const start = startDate ? new Date(startDate) : null;
+		const end = endDate ? new Date(endDate) : null;
+
+		const filteredData = message.filter((row) => {
+            const dateRange = (!start || row.date >= start) && (!end || row.date <= end);
+		setFiltered(filteredData);
+        setTotalEntriesReturned(filteredData.length);
+    };
   	
 	return (
 		<div>
@@ -65,6 +80,43 @@ function App() {
                         onChange={e => setEndDate(e.target.value)} 
                     />
                 </label>
+
+				<button onClick={handleFilter} style={{ marginLeft: '1rem' }}>Filter</button>
+            </div>
+            
+			<div style={{ marginBottom: '1rem' }}>
+				<strong>Total Usage (kWh):</strong> {totalUsage.toFixed(2)}
+            </div>
+            
+            <div
+                style={{
+				width: 'auto',
+				height: '25rem',
+				overflowY: 'scroll'
+			}}>
+                <table
+                    border="1"
+                    cellPadding="5"
+                    style={{
+                        marginTop: '1rem',
+                        width: '100%'
+                    }}
+                >
+					<thead>
+					<tr>
+						<th>Date</th>
+					</tr>
+					</thead>
+					<tbody>
+						{
+							filtered.map((row, index) => (
+								<tr key={index}>
+									<td>{row.date.toLocaleString()}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
             </div>
 		</div>
   	)
