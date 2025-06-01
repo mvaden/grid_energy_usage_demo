@@ -6,6 +6,9 @@ function App() {
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [filtered, setFiltered] = useState([]);
+	const [totalUsage, setTotalUsage] = useState(0);
+	const [selectedDays, setSelectedDays] = useState([]);
+    const [selectedLoadTypes, setSelectedLoadTypes] = useState([]);
     const [error, setError] = useState(undefined);
 
 	useEffect(() => {
@@ -50,9 +53,30 @@ function App() {
 
 		const filteredData = message.filter((row) => {
             const dateRange = (!start || row.date >= start) && (!end || row.date <= end);
+
+            const matchedDay = selectedDays.length === 0 || selectedDays.includes(row.Day_of_week);
+            const matchedLoadType = selectedLoadTypes.length === 0 || selectedLoadTypes.includes(row.Load_Type);
+            
+			return dateRange && matchedDay && matchedLoadType;
 		setFiltered(filteredData);
         setTotalEntriesReturned(filteredData.length);
     };
+
+    const loadTypes = [
+        'Light_Load',
+        'Maximum_Load',
+        'Medium_Load'
+    ];
+
+    const dayNames = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
   	
 	return (
 		<div>
@@ -81,6 +105,43 @@ function App() {
                     />
                 </label>
 
+                <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                        Day of Week:
+                        <select
+                            multiple
+                            value={selectedDays}
+                            onChange={e => {
+                                setSelectedDays(Array.from(e.target.selectedOptions, o => o.value));
+                            }
+                        }>
+                            {
+                                dayNames.map((day) => (
+                                    <option key={day} value={day}>{day}</option>
+                                ))
+                            }
+                        </select>
+                    </label>
+                </div>
+
+                <div style={{ marginBottom: '1rem' }}>
+                    <label>
+                        Load Type:
+                        <select
+                            multiple
+                            value={selectedLoadTypes}
+                            onChange={e => {
+                                setSelectedLoadTypes(Array.from(e.target.selectedOptions, o => o.value));
+                            }
+                        }>
+                            {
+                                loadTypes.map((load) => (
+                                    <option key={load} value={load}>{load}</option>
+                                ))
+                            }
+                        </select>
+                    </label>
+                </div>
 				<button onClick={handleFilter} style={{ marginLeft: '1rem' }}>Filter</button>
             </div>
             
@@ -105,6 +166,9 @@ function App() {
 					<thead>
 					<tr>
 						<th>Date</th>
+						<th>Usage (kWh)</th>
+						<th>Day of Week</th>
+						<th>Type of Load</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -112,6 +176,9 @@ function App() {
 							filtered.map((row, index) => (
 								<tr key={index}>
 									<td>{row.date.toLocaleString()}</td>
+									<td>{row.Usage_kWh.toFixed(2)}</td>
+									<td>{row.Day_of_week}</td>
+									<td>{row.Load_Type}</td>
 								</tr>
 							))
 						}
