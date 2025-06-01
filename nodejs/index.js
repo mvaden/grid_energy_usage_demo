@@ -4,8 +4,8 @@ const fs = require('fs');
 const csv = require('csv-parser');
 const cors = require("cors");
 const app = express();
-const serverPort = process.env.SERVER_PORT || 4000;
-const clientPort = process.env.CLIENT_PORT || 5173;
+const serverPort = process.env.SERVER_PORT;
+const clientPort = process.env.CLIENT_PORT;
 const CSV_PATH = 'Steel_industry_data.csv';
 
 app.use((req, res, next) => {
