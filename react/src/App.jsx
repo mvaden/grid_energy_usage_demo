@@ -11,8 +11,8 @@ import './App.css'
 
 function App() {
     const [message, setMessage] = useState('waiting...');
-	const [startDate, setStartDate] = useState('');
-	const [endDate, setEndDate] = useState('');
+	const [startDate, setStartDate] = useState('2018-01-01T12:00');
+	const [endDate, setEndDate] = useState('2018-01-02T12:00');
 	const [filtered, setFiltered] = useState([]);
 	const [totalUsage, setTotalUsage] = useState(0);
     const [averageUsage, setAverageUsage] = useState(0);
