@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
     HeadingOne,
+    Input_DateTime,
 } from './Components';
 import './App.css'
 
@@ -115,67 +116,25 @@ function App() {
 		<div>
             <HeadingOne value={ 'Steel Industry Energy Usage' } />
             <div style={{ marginBottom: '1rem' }}>
-                
-				<label>
-				    Start Date:
-                    <input 
-                        type="datetime-local" 
-                        value={startDate}
-                        max="01-01-2019"
-                        min="01-01-2018"
-                        onChange={e => setStartDate(e.target.value)} 
-                    />
-                </label>
-				<br />
-				<label style={{ marginLeft: '1rem' }}>
-                    End Date:
-                    <input 
-                        type="datetime-local" 
-                        value={endDate} 
-                        max="2019-01-01T00:00"
-                        min="2018-01-01T00:00"
-                        onChange={e => setEndDate(e.target.value)} 
-                    />
-                </label>
-
-                <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                        Day of Week:
-                        <select
-                            multiple
-                            value={selectedDays}
-                            onChange={e => {
-                                setSelectedDays(Array.from(e.target.selectedOptions, o => o.value));
-                            }
-                        }>
-                            {
-                                dayNames.map((day) => (
-                                    <option key={day} value={day}>{day}</option>
-                                ))
-                            }
-                        </select>
-                    </label>
-                </div>
-
-                <div style={{ marginBottom: '1rem' }}>
-                    <label>
-                        Load Type:
-                        <select
-                            multiple
-                            value={selectedLoadTypes}
-                            onChange={e => {
-                                setSelectedLoadTypes(Array.from(e.target.selectedOptions, o => o.value));
-                            }
-                        }>
-                            {
-                                loadTypes.map((load) => (
-                                    <option key={load} value={load}>{load}</option>
-                                ))
-                            }
-                        </select>
-                    </label>
-                </div>
-				<button onClick={handleFilter} style={{ marginLeft: '1rem' }}>Filter</button>
+                <Input_DateTime
+                    label={ 'Start Date: ' }
+                    onChange={e =>  setStartDate(e.target.value)}
+                    value={startDate}
+                />
+                <Input_DateTime
+                    label={ 'End Date: ' }
+                    onChange={e => { setEndDate(e.target.value), console.log(e.target.value) }}
+                    value={endDate}
+                />
+                <Input_Select
+                    label={ 'Day of Week:' }
+                    multiple={true}
+                    options={dayNames}
+                    onChange={e => {
+                        setSelectedDays(Array.from(e.target.selectedOptions, o => o.value));
+                    }}
+                    value={selectedDays}
+                />
             </div>
             
 			<div style={{ marginBottom: '1rem' }}>
