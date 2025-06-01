@@ -24,22 +24,22 @@ function App() {
 
 	useEffect(() => {
         fetch('/api/all-data')
-    	.then(res => {
+            .then(res => {
                 if (!res.ok) throw new Error("HTTP Error: status ", res.status);
-
-			const contentType = res.headers.get('content-type');
+                
+                const contentType = res.headers.get('content-type');
                 if (!contentType || !contentType.includes('application/json')) throw new Error('Response is not JSON');
                 
                 return res.json();
-		})
+            })
             .then(({ Message }) => {
                 setMessage(formatDates(Message, 'date'));
             })
             .catch(({ Error }) => {
                 console.error(Error);
                 setError();
-		});
-  	}, []);
+            });
+    }, []);
 
     const findArrayMedian = (values) => {
         if (!Array.isArray(values) || values.length === 0) return null;
