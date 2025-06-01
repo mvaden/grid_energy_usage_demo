@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     res.send({ "message": "API is working"});
 });
 
-app.get('/data', (req, res) => {
+app.get('/all-data', (req, res) => {
   const results = [];
 
   fs.createReadStream(CSV_PATH)
@@ -41,10 +41,10 @@ app.get('/data', (req, res) => {
             Day_of_week: data.Day_of_week,
             Load_Type: data.Load_Type
       };
-      results.push(processedData)
+      results.push(processedData);
     })
     .on('end', () => {
-      res.status(200).json({
+      res.json({
         success: true,
         totalRecords: results.length,
         data: results
