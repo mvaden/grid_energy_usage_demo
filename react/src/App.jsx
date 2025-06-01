@@ -1,25 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import './App.css'
 
 function App() {
     const [message, setMessage] = useState('waiting...');
+    const [error, setError] = useState(undefined);
 
 	useEffect(() => {
-    fetch('/api/data')
+        fetch('/api/all-data')
     	.then(res => {
-			// console.log("Res status: ", res.status),
-			// console.log("Res headers: ", res.headers)
-
-			if (!res.ok) throw new Error ("HTTP Error: status ", res.status)
+                if (!res.ok) throw new Error("HTTP Error: status ", res.status);
 
 			const contentType = res.headers.get('content-type');
-			if (!contentType || !contentType.includes('application/json')) {
-				throw new Error('Response is not JSON');
-			};
-			return res.json()
+                if (!contentType || !contentType.includes('application/json')) throw new Error('Response is not JSON');
+                
+                return res.json();
 		})
-      	.then(data => {
-			setMessage(data)
+            .then(({ Message }) => {
+                setMessage(convertDates(Message, 'date'));
+            })
+            .catch(({ Error }) => {
+                console.error(Error);
+                setError();
 		});
   	}, []);
 
