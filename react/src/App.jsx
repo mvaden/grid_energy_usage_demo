@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {
     HeadingOne,
     Input_DateTime,
+    Input_Select,
 } from './Components';
 import './App.css'
 
@@ -134,6 +135,15 @@ function App() {
                         setSelectedDays(Array.from(e.target.selectedOptions, o => o.value));
                     }}
                     value={selectedDays}
+                />
+                <Input_Select
+                    label={ 'Load Type: ' }
+                    multiple={true}
+                    options={loadTypes}
+                    onChange={e => {
+                        setSelectedLoadTypes(Array.from(e.target.selectedOptions, o => o.value));
+                    }}
+                    value={selectedLoadTypes}
                 />
             </div>
             
