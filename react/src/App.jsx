@@ -59,20 +59,6 @@ function App() {
             return calculatedMedianValue;
         };
     };
-    
-	function formatDates(array, dateKey) {
-		return array.map((item) => {
-			const original = item[dateKey];
-			const [datePart, timePart] = original.split(' ');
-			const [day, month, year] = datePart.split('/'); 
-			const isoString = `${year}-${month}-${day}T${timePart}`;
-
-			return {
-				...item,
-				[dateKey]: new Date(isoString),
-			};
-		});
-	};
 
 	const handleFilter = () => {
 		if (!startDate || !endDate) return;
@@ -100,22 +86,6 @@ function App() {
         setTotalEntriesReturned(filteredData.length);
     };
 
-    const loadTypes = [
-        'Light_Load',
-        'Maximum_Load',
-        'Medium_Load'
-    ];
-
-    const dayNames = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-    ];
-
     const listData = [
         {
             listItemContent: 'Total Usage (kWh): ',
@@ -133,13 +103,6 @@ function App() {
             listItemContent: 'Total Entries Returned: ',
             calculcation: totalEntriesReturned
         },
-    ];
-
-    const tableHeadings = [
-        'Date',
-        'Usage (kWh)',
-        'Day of Week',
-        'Type of Load'
     ];
   	
 	return (
