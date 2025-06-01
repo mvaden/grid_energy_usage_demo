@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { HeadingOne } from './Components';
+import {
+    HeadingOne,
+} from './Components';
 import './App.css'
 
 function App() {
@@ -111,7 +113,7 @@ function App() {
   	
 	return (
 		<div>
-            <HeadingOne value={"Steel Industry Energy Usage"} />
+            <HeadingOne value={ 'Steel Industry Energy Usage' } />
             <div style={{ marginBottom: '1rem' }}>
                 
 				<label>

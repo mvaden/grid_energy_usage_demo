@@ -1,3 +1,5 @@
-import HeadingOne from "./Heading/HeadingOne/HeadingOne.jsx";
+import HeadingOne from "./Headings/HeadingOne/HeadingOne";
 
-export { HeadingOne };
+export {
+    HeadingOne,
+};
