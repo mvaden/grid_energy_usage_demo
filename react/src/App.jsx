@@ -158,43 +158,22 @@ function App() {
                 <br />
                 <strong>Median Usage (kWh): </strong> { medianUsage }
             </div>
-            
             <div
                 style={{
-				width: 'auto',
-				height: '25rem',
-				overflowY: 'scroll'
-			}}>
-                <table
-                    border="1"
-                    cellPadding="5"
-                    style={{
-                        marginTop: '1rem',
-                        width: '100%'
-                    }}
-                >
-					<thead>
-					<tr>
-						<th>Date</th>
-						<th>Usage (kWh)</th>
-						<th>Day of Week</th>
-						<th>Type of Load</th>
-					</tr>
-					</thead>
-					<tbody>
-						{
-							filtered.map((row, index) => (
-								<tr key={index}>
-									<td>{row.date.toLocaleString()}</td>
-									<td>{row.Usage_kWh.toFixed(2)}</td>
-									<td>{row.Day_of_week}</td>
-									<td>{row.Load_Type}</td>
-								</tr>
-							))
-						}
-					</tbody>
-				</table>
-            </div>
+                    height: '25rem',
+                    overflowY: 'scroll',
+                    width: 'auto'
+                }}
+            >
+                <Table
+                    cellBorder={'5'}
+                    cellPadding={'5'}
+                    overflowY={'scroll'}
+                    tableData={filtered}
+                    tableHeadings={tableHeadings}
+                    tableWidth={'auto'}
+                    />    
+			</div>
 		</div>
   	)
 };
