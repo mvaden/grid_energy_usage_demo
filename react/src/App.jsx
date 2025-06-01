@@ -7,20 +7,27 @@ import {
     List,
     Table
 } from './Components';
+import {
+    dayNames,
+    formatDates,
+    findArrayMedian,
+    loadTypes,
+    tableHeadings
+} from './utils/_helpers';
 import './App.css'
 
 function App() {
-    const [message, setMessage] = useState('waiting...');
-	const [startDate, setStartDate] = useState('2018-01-01T12:00');
-	const [endDate, setEndDate] = useState('2018-01-02T12:00');
-	const [filtered, setFiltered] = useState([]);
-	const [totalUsage, setTotalUsage] = useState(0);
     const [averageUsage, setAverageUsage] = useState(0);
+	const [endDate, setEndDate] = useState('2018-01-02T12:00');
+    const [error, setError] = useState(undefined);
+	const [filtered, setFiltered] = useState([]);
+    const [message, setMessage] = useState('waiting...');
     const [medianUsage, setMedianUsage] = useState(0);
-	const [totalEntriesReturned, setTotalEntriesReturned] = useState(0);
+	const [startDate, setStartDate] = useState('2018-01-01T12:00');
 	const [selectedDays, setSelectedDays] = useState([]);
     const [selectedLoadTypes, setSelectedLoadTypes] = useState([]);
-    const [error, setError] = useState(undefined);
+	const [totalEntriesReturned, setTotalEntriesReturned] = useState(0);
+	const [totalUsage, setTotalUsage] = useState(0);
 
 	useEffect(() => {
         fetch('/api/all-data')
@@ -41,25 +48,6 @@ function App() {
             });
     }, []);
 
-    const findArrayMedian = (values) => {
-        if (!Array.isArray(values) || values.length === 0) return null;
-
-        const sortValues = [...values].sort((a, b) => a - b);
-        const valuesLength = sortValues.length;
-        const calculateMedian = Math.floor(valuesLength / 2);
-
-        if (valuesLength % 2 === 1) return sortValues[calculateMedian];
-
-        if (valuesLength % 2 === 0) {
-            const mid = valuesLength / 2
-            const firstHalf = sortValues.slice(0, mid);
-            const secondHalf = sortValues.slice(mid);
-            const calculatedMedianValue = Math.floor(((firstHalf[0] + secondHalf[secondHalf.length - 1]) / 2) * 1000) / 1000;
-
-            return calculatedMedianValue;
-        };
-    };
-
 	const handleFilter = () => {
 		if (!startDate || !endDate) return;
 
@@ -75,15 +63,15 @@ function App() {
 			return dateRange && matchedDay && matchedLoadType;
 		});
 			
-        const totalUsed = filteredData.reduce((sum, row) => sum + row.Usage_kWh, 0);
         const medianUsage = filteredData.map(({ Usage_kWh }) => Usage_kWh).sort((a, b) => a - b);
         const findMedian = findArrayMedian(medianUsage);
+        const totalUsed = filteredData.reduce((sum, row) => sum + row.Usage_kWh, 0);
 
-        setMedianUsage(findMedian);
-		setFiltered(filteredData);
-		setTotalUsage(totalUsed);
 		setAverageUsage(filteredData.length > 0 ? totalUsed / filteredData.length : 0);
+		setFiltered(filteredData);
+        setMedianUsage(findMedian);
         setTotalEntriesReturned(filteredData.length);
+		setTotalUsage(totalUsed);
     };
 
     const listData = [
@@ -156,7 +144,7 @@ function App() {
                     tableData={filtered}
                     tableHeadings={tableHeadings}
                     tableWidth={'auto'}
-                    />    
+                />
 			</div>
 		</div>
   	)
