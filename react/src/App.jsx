@@ -19,16 +19,16 @@ import './App.css'
 
 function App() {
     const [averageUsage, setAverageUsage] = useState(0);
-	const [endDate, setEndDate] = useState('2018-01-02T12:00');
+    const [endDate, setEndDate] = useState('2018-01-02T12:00');
     const [error, setError] = useState(undefined);
-	const [filtered, setFiltered] = useState([]);
+    const [filtered, setFiltered] = useState([]);
     const [message, setMessage] = useState('waiting...');
     const [medianUsage, setMedianUsage] = useState(0);
-	const [startDate, setStartDate] = useState('2018-01-01T12:00');
-	const [selectedDays, setSelectedDays] = useState([]);
+    const [startDate, setStartDate] = useState('2018-01-01T12:00');
+    const [selectedDays, setSelectedDays] = useState([]);
     const [selectedLoadTypes, setSelectedLoadTypes] = useState([]);
-	const [totalEntriesReturned, setTotalEntriesReturned] = useState(0);
-	const [totalUsage, setTotalUsage] = useState(0);
+    const [totalEntriesReturned, setTotalEntriesReturned] = useState(0);
+    const [totalUsage, setTotalUsage] = useState(0);
 
 	useEffect(() => {
         fetch('/api/all-data')

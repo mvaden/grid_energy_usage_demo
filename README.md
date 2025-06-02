@@ -21,10 +21,10 @@ The front-end uses React for performing HTTP requests to receive data from the `
 5. When the React server is running locally on your environment, execute the route `/all-data` in the address bar to access the UI side of the project
 6. After the UI has loaded, enter a `Date-Time` value for the inputs labeled "Start Date" and "End Date", or use the default values provided
 7. Click the "Get Records" button and observe the UI render the following section with the heading of "Totals, Means, and Medians"
-   a. Total Usage (kWh): Sum of all `Usage_kWh` values returned within the selected date range
-   b. Average Usage (kWh): The mean or average of all `Usage_kWh` values returned within the date range
-   c. Day of Week: The day associated with each record
-   d. Type of Load: The type of load associated with each record
+   - Total Usage (kWh): Sum of all `Usage_kWh` values returned within the selected date range
+   - Average Usage (kWh): The mean or average of all `Usage_kWh` values returned within the date range
+   - Day of Week: The day associated with each record
+   - Type of Load: The type of load associated with each record
 8. Optionally, select one or more options for "Day of Week" and click "Get Records" button to refine your query, based on the days of the week selected
 9. Optionally, select one or more options for "Type of Load" and click "Get Records" button to refine your query, based on the type(s) of load selected
    10: Sections "Totals, Means, and Medians" and "Energy Usage Table Data" will be mounted and rendered in the UI once the GET HTTP request for records is successful
