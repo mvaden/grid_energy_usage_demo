@@ -29,20 +29,28 @@ const Table = (
                 <thead>
                     <tr>
                         {
-                            tableHeadings.map((row, index) => (                 
+                            tableHeadings.map(( row, index ) => {(                 
                                 <th key={index}>{ row }</th>
-                            ))
+                            )})
                         }
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        tableData.map((row, index) => (
-                            <tr key={index}>
-                                <td>{row.date.toLocaleString()}</td>
-                                <td>{row.Usage_kWh}</td>
-                                <td>{row.Day_of_week}</td>
-                                <td>{row.Load_Type}</td>
+                        tableData.map((
+                            {
+                                date,
+                                Day_of_week,
+                                Load_Type,
+                                Usage_kWh
+                            },
+                            index
+                        ) => (
+                            <tr key={ index }>
+                                <td>{ date.toLocaleString() }</td>
+                                <td>{ Usage_kWh }</td>
+                                <td>{ Day_of_week }</td>
+                                <td>{ Load_Type }</td>
                             </tr>
                         ))
                     }

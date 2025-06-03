@@ -55,18 +55,18 @@ function App() {
 		const start = startDate ? new Date(startDate) : null;
 		const end = endDate ? new Date(endDate) : null;
 
-		const filteredData = message.filter((row) => {
-            const dateRange = (!start || row.date >= start) && (!end || row.date <= end);
+		const filteredData = message.filter(({ date, Day_of_week, Load_Type }) => {
+            const dateRange = ( !start || date >= start ) && ( !end || date <= end );
 
-            const matchedDay = selectedDays.length === 0 || selectedDays.includes(row.Day_of_week);
-            const matchedLoadType = selectedLoadTypes.length === 0 || selectedLoadTypes.includes(row.Load_Type);
+            const matchedDay = selectedDays.length === 0 || selectedDays.includes( Day_of_week );
+            const matchedLoadType = selectedLoadTypes.length === 0 || selectedLoadTypes.includes( Load_Type );
             
 			return dateRange && matchedDay && matchedLoadType;
 		});
 			
         const medianUsage = filteredData.map(({ Usage_kWh }) => Usage_kWh).sort((a, b) => a - b);
         const findMedian = findArrayMedian(medianUsage);
-        const totalUsed = filteredData.reduce((sum, row) => sum + row.Usage_kWh, 0);
+        const totalUsed = filteredData.reduce((sum, { Usage_kWh }) => sum + Usage_kWh, 0);
 
 		setAverageUsage(filteredData.length > 0 ? totalUsed / filteredData.length : 0);
 		setFiltered(filteredData);
@@ -114,7 +114,7 @@ function App() {
                     multiple={true}
                     options={dayNames}
                     onChange={e => {
-                        setSelectedDays(Array.from(e.target.selectedOptions, o => o.value));
+                        setSelectedDays( Array.from(e.target.selectedOptions, ({ value }) => value) );
                     }}
                     value={selectedDays}
                 />

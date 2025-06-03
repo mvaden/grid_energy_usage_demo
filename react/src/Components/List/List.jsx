@@ -1,14 +1,19 @@
 const List = ({ listData }) => {
-    console.log('list data', listData.map((row) =>{ return ( row )}))
     return (
         <ul style={{ listStyleType: 'none' }}>
             {
-                listData.map((row) => {          
+                listData.map((
+                    {
+                        calculcation,
+                        listItemContent
+                    },
+                    index
+                ) => {          
                     return (
 
-                        <li>
-                            { row.listItemContent }
-                            { row.calculcation }
+                        <li key={ index }>
+                            { listItemContent }
+                            { calculcation }
                         </li>
                     )
                 })
