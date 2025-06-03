@@ -9,7 +9,6 @@ const Table = (
         overflowY
     }
 ) => {
-    console.log("Table data: ", tableData)
     return (
         <div
             style={{

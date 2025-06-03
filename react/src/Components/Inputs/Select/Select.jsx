@@ -10,15 +10,15 @@ const Input_Select = (
     return (
         <div>
             <label>
-                {label} 
+                { label } 
                 <select
-                    multiple={multiple}
-                    value={value}
-                    onChange={onChange}
+                    multiple={ multiple }
+                    value={ value }
+                    onChange={ onChange }
                 >
                     {
-                        options.map((day) => (
-                            <option key={day} value={day}>{day}</option>
+                        options.map(( day ) => (
+                            <option key={ day } value={ day }>{ day }</option>
                         ))
                     }
                 </select>

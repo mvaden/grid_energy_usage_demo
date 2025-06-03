@@ -12,9 +12,9 @@ const Input_DateTime = (
                 <input
                     max="2019-01-01T00:00"
                     min="2018-01-01T00:00"
-                    onChange={onChange}
+                    onChange={ onChange }
                     type="datetime-local"
-                    value={value}
+                    value={ value }
                 />
             </label>      
         </div>

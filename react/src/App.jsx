@@ -77,20 +77,20 @@ function App() {
 
     const listData = [
         {
-            listItemContent: 'Total Usage (kWh): ',
-            calculcation: totalUsage.toFixed(2)
+            calculcation: totalUsage.toFixed(2),
+            listItemContent: 'Total Usage (kWh): '
         },
         {
-            listItemContent: 'Average Usage (kWh): ',
-            calculcation: averageUsage.toFixed(2)
+            calculcation: averageUsage.toFixed(2),
+            listItemContent: 'Average Usage (kWh): '
         },
         {
-            listItemContent: 'Median Usage (kWh): ',
-            calculcation: medianUsage
+            calculcation: medianUsage,
+            listItemContent: 'Median Usage (kWh): '
         },
         {
-            listItemContent: 'Total Entries Returned: ',
-            calculcation: totalEntriesReturned
+            calculcation: totalEntriesReturned,
+            listItemContent: 'Total Entries Returned: '
         },
     ];
   	
@@ -106,7 +106,7 @@ function App() {
                 />
                 <Input_DateTime
                     label={ 'End Date: ' }
-                    onChange={e => { setEndDate(e.target.value), console.log(e.target.value) }}
+                    onChange={e => { setEndDate(e.target.value) }}
                     value={endDate}
                 />
                 <Input_Select

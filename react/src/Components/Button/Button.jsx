@@ -1,10 +1,10 @@
 const Button_Submit = ({ label, onClick }) => {
     return (
         <button
-            onClick={onClick}
+            onClick={ onClick }
             style={{ border: '1px solid #000' }}
         >
-            {label}
+            { label }
         </button>
     );
 };
